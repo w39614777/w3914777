@@ -1,19 +1,34 @@
 # AMPStencil-artifact
 
 Code structure
-The directories sintering, graingrowth and snow respectively contain the implementations and evaluations of the three applications in the paper
-The directories sintreing/paras,graingrowth/paras,snow/paras contain five different parameters corresponding to three application benchmarks
-The files sintreing/function.h,graingrowth/function.h,snow/function.h implement 3 applications' computation kernels
-The files of .py implement the running script of evaluations
 
-build
+    The directories sintering, graingrowth and snow respectively contain the implementations and evaluations of the three applications in the paper.
+    The directories sintreing/paras,graingrowth/paras,snow/paras contain five different parameters corresponding to three application benchmarks.
+    The files sintreing/function.h,graingrowth/function.h,snow/function.h implement 3 applications' computation kernels.
+    The files of .py implement the running script of evaluations.
 
+Build
 
-Running
-  For sintering
+    git clone https://github.com/w39614777/w3914777.git
+
+Running for sintering:
+  
     cd sintering
     
-    For motivation:
+    For execution time (in microsecond) of the sintering kernels:(Table 1)
+      Commands to run:
+        nvcc sinteringhalf.cu -o sinteringhalf --std=c++11 -arch=sm_80
+        nvcc sinteringfp64.cu -o sinteringfp64 --std=c++11 -arch=sm_80
+        nvcc sinteringfp32.cu -o sinteringfp32 --std=c++11 -arch=sm_80
+        ncu --set full -o sinteringhalf ./sinteringhalf
+        ncu --set full -o sinteringfp64 ./sinteringfp64
+        ncu --set full -o sinteringfp32 ./sinteringfp32
+       Files to store results:
+        The execution time of FP16 in file sinteringhalf.ncu-rep
+        The execution time of FP64 in file sinteringfp64.ncu-rep
+        The execution time of FP32 in file sinteringfp32.ncu-rep
+        
+    For motivation:(Figure 8)
       Commands to run:(The following 2 commands should be executed serially)
         python motivation_run.py //This command will get the motivation simulation result of AMPStencil,GRAM-clu,GRAM-sca and Pure FP64/FP32.
         python motivationerror.py //This command will get the average absolute error of AMPStencil,GRAM-clu,GRAM-sca relative to Pure FP64/FP32.
@@ -22,12 +37,8 @@ Running
         The error of  GRAM-sca(FP64 mixed with FP16) in file sintering/error/motivation/gram2_double.csv
         The error of  AMPStencil-spa(FP64 mixed with FP16) in file sintering/error/motivation/amstencil_double_monitor1.csv
         The error of  AMPStencil-tem(FP64 mixed with FP16) in file sintering/error/motivation/amstencil_double_monitor2.csv
-        The error of  GRAM-clu(FP32 mixed with FP16) in file sintering/error/motivation/gram1_float.csv
-        The error of  GRAM-sca(FP32 mixed with FP16) in file sintering/error/motivation/gram2_float.csv
-        The error of  AMPStencil-spa(FP32 mixed with FP16) in file sintering/error/motivation/amstencil_float_monitor1.csv
-        The error of  AMPStencil-tem(FP32 mixed with FP16) in file sintering/error/motivation/amstencil_float_monitor2.csv
 
-    For end2end:
+    For end2end:(Table 3)
       Commands to run:(The following 4 commands should be executed serially)
         python end2end_run1.py//This command will get the simulation result of AMPStencil,GRAM-clu,GRAM-sca and Pure FP64/FP32.
         pyrhon end2end_run2.py //This command will get the simulation duration of AMPStencil,GRAM-clu,GRAM-sca and Pure FP64/FP32.
@@ -51,7 +62,7 @@ Running
         The speedup of AMPStencil-spa(FP32 mixed with FP16) in file sintering/speedup/float/amstencil/monitor1/amstencil.csv
         The speedup of AMPStencil-sca(FP32 mixed with FP16) in file sintering/speedup/float/amstencil/monitor2/amstencil.csv
         
-     For overhead of AMPStencil:
+     For overhead of AMPStencil:(Table 4)
       Commands to run:(The following 2 commands should be executed serially)
         python time_without_monitorandconversion.py//This command will get the AMPStencil simulation duration exclude monitor
         python monitor_percent.py //This command will get the percentage of monitor duration in the total duration
@@ -62,10 +73,11 @@ Running
         The monitor percentage of AMPStencil-tem(FP32 mixed with FP16) in file sintering/monitor:total/500/float/monitor2/percentage.csv     
         
         
-  For graingrowth 
+Running for graingrowth:
+  
     cd graingrowth
     
-    For motivation:
+    For motivation:(Figure 9)
       Commands to run:(The following 3 commands should be executed serially)
         python motiavtion_mix.py //This command will get the motivation simulation result of AMPStencil,GRAM-clu,GRAM-sca
         python motivation_pure.py//This command will get the motivation simulation result of Pure FP64/FP32
@@ -75,12 +87,8 @@ Running
         The error of  GRAM-sca(FP64 mixed with FP16) in file graingrowth/error/motivation/gram2_double.csv
         The error of  AMPStencil-spa(FP64 mixed with FP16) in file graingrowth/error/motivation/amstencil_double_monitor1.csv
         The error of  AMPStencil-tem(FP64 mixed with FP16) in file graingrowth/error/motivation/amstencil_double_monitor2.csv
-        The error of  GRAM-clu(FP32 mixed with FP16) in file graingrowth/error/motivation/gram1_float.csv
-        The error of  GRAM-sca(FP32 mixed with FP16) in file graingrowth/error/motivation/gram2_float.csv
-        The error of  AMPStencil-spa(FP32 mixed with FP16) in file graingrowth/error/motivation/amstencil_float_monitor1.csv
-        The error of  AMPStencil-tem(FP32 mixed with FP16) in file graingrowth/error/motivation/amstencil_float_monitor2.csv
         
-    For end2end:
+    For end2end:(Table 3)
       Commands to run:(The following 4 commands should be executed serially)
         python end2end_mix.py //This command will get the simulation result and simulation duration of AMPStencil,GRAM-clu,GRAM-sca
         python end2end_pure.py //This command will get the simualtion result and simulation duaration of Pure FP64/FP32
@@ -104,7 +112,7 @@ Running
         The speedup of AMPStencil-spa(FP32 mixed with FP16) in file graingrowth/speedup/float/amstencil/monitor1/amstencil.csv
         The speedup of AMPStencil-sca(FP32 mixed with FP16) in file graingrowth/speedup/float/amstencil/monitor2/amstencil.csv
         
-     For overhead of AMPStencil:
+     For overhead of AMPStencil:(Table 4)
       Commands to run:(The following 3 commands should be executed serially)
         python monitor_independent_withoutmonitor.py//This command will get the AMPStencil simulation duration exclude monitor
         python monitor_independent_withmonitor.py // This command will get the AMPStencil simulation duration include monitor
@@ -116,6 +124,7 @@ Running
         The monitor percentage of AMPStencil-tem(FP32 mixed with FP16) in file graingrowth/monitor:total/500/float/monitor2/percentage.csv
         
         
-  For snow:  
-    The running commands and files to store results is similar with graingrowth.      
+Running for snow:  
+  
+    The running commands and files to store results is similar to graingrowth.      
  
