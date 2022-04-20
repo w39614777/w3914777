@@ -2,10 +2,8 @@
 
 Code structure
 
-    The directories sintering, graingrowth and snow respectively contain the implementations and evaluations of the three applications in the paper.
-    The directories sintreing/paras,graingrowth/paras,snow/paras contain five different parameters corresponding to three application benchmarks.
-    The files sintreing/function.h,graingrowth/function.h,snow/function.h implement 3 applications' computation kernels.
-    The files of .py implement the running script of evaluations.
+    ./sintering, ./graingrowth and ./snow: source code of simulation applicaions, including implementation of baseline, GRAM and AMPStencil
+    ./app name/paras: benchmarks used in evaluation.
 
 Build
 
@@ -13,6 +11,9 @@ Build
     
     
 Running    
+    
+    nvidia-smi -lgc 1410 -i GPU_Number
+    export CUDA_VISIBLE_DEVICES=GPU_Number
     
 Table 3 for Snowflake Crystal Growth:
 
@@ -61,7 +62,7 @@ Figure 7:
         python motivation_pure.py
         python motivationerror.py
     Fils to store results:
-        w3914777/snowflake/error/motivation
+        w3914777/snowflake/error/motivation/
         
         
 Figure 8:
@@ -71,7 +72,7 @@ Figure 8:
         python motivation_run.py 
         python motivationerror.py
     Fils to store results:
-        w3914777/sintering/error/motivation
+        w3914777/sintering/error/motivation/
         
         
 Figure 9:
@@ -82,7 +83,7 @@ Figure 9:
         python motivation_pure.py
         python motivationerror.py
     Fils to store results:
-         w3914777/graingrowth/error/motivation
+         w3914777/graingrowth/error/motivation/
          
          
 Figure 10:
@@ -91,7 +92,7 @@ Figure 10:
         cd w3914777/snowflake
         python simulation_result.py
     Fils to store results:
-        w3914777/snowflake/simulation_result
+        w3914777/snowflake/simulation_result/
         
         
 Table 4 for Snowflake Crystal Growth:
@@ -100,7 +101,7 @@ Table 4 for Snowflake Crystal Growth:
         python time_without_monitorandconversion.py
         python monitor_percent.py
      Fils to store results:
-        w3914777/snowflake/monitor:total
+        w3914777/snowflake/monitor2total/
         
         
 Table 4 for Solid-State Sintering:
@@ -110,7 +111,7 @@ Table 4 for Solid-State Sintering:
         python monitor_independent_withmonitor.py 
         python monitor_percent.py 
      Fils to store results:
-        w3914777/graingrowth/monitor:total  
+        w3914777/graingrowth/monitor2total/  
         
         
 Table 4 for Grain growth:
@@ -120,5 +121,5 @@ Table 4 for Grain growth:
         python monitor_independent_withmonitor.py 
         python monitor_percent.py 
      Fils to store results:
-        w3914777/graingrowth/monitor:total        
+        w3914777/graingrowth/monitor2total/       
  
