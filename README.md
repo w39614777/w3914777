@@ -10,10 +10,12 @@ Code structure
 Build
 
     git clone https://github.com/w39614777/w3914777.git
+    
 
 Running for sintering:
   
     cd sintering
+    nvidia-smi -lgc 1410 -i GPU_Number
     
     For execution time (in microsecond) of the sintering kernels:(Table 1)
       Commands to run:
@@ -76,6 +78,7 @@ Running for sintering:
 Running for graingrowth:
   
     cd graingrowth
+    nvidia-smi -lgc 1410 -i GPU_Number
     
     For motivation:(Figure 9)
       Commands to run:(The following 3 commands should be executed serially)
