@@ -58,7 +58,7 @@ Figure 7:
 
     Commands to run:
         cd w3914777/snowflake
-        python motiavtion_mix.py 
+        python motivation_mix.py 
         python motivation_pure.py
         python motivationerror.py
     Fils to store results:
@@ -79,7 +79,7 @@ Figure 9:
 
     Commands to run:
         cd w3914777/graingrowth
-        python motiavtion_mix.py 
+        python motivation_mix.py 
         python motivation_pure.py
         python motivationerror.py
     Fils to store results:
