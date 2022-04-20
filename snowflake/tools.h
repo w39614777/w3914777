@@ -1,6 +1,6 @@
 #ifndef TOOL_H
     #define TOOL_H
-    #include"./paras/para3.h"
+    #include"./paras/para5.h"
     template<typename T>
     void writetocsv(string filename,T* data,int X,int Y){
         ofstream f(filename);
@@ -21,65 +21,41 @@
         }
         f.close();
     }
-    __global__ void dataprepare_high(highprecision *eta1,highprecision *eta2){
+    __global__ void dataprepare_high(highprecision *phi){
         int x=blockIdx.z%unitdimX*unitx+threadIdx.x;
         int y=blockIdx.z/unitdimX*unity+threadIdx.y;
-        highprecision(*eta1d)[dimX]=(highprecision(*)[dimX])eta1;
-        highprecision(*eta2d)[dimX]=(highprecision(*)[dimX])eta2;
-        float dis1=sqrt(pow(x-Rx,2)+pow(y-Ry,2));
-        if(dis1<=R){
-            eta1d[y][x]=0;
-            eta2d[y][x]=1;
+        highprecision(*phid)[dimX]=(highprecision(*)[dimX])phi;
+        float dis1=pow(x-(dimX/2+8),2)+pow(y-(dimY/2+8),2);
+        if(dis1<seed){
+            phid[y][x]=1;
         }
-        else{
-            eta1d[y][x]=1;
-            eta2d[y][x]=0;
-        }
+
     }
-    __global__ void dataprepare_half(half *eta1,half *eta2){
+    __global__ void dataprepare_half(half *phi){
         int x=blockIdx.z%unitdimX*unitx+threadIdx.x;
         int y=blockIdx.z/unitdimX*unity+threadIdx.y;
-        half(*eta1d)[dimX]=(half(*)[dimX])eta1;
-        half(*eta2d)[dimX]=(half(*)[dimX])eta2;
-        float dis1=sqrt(pow(x-Rx,2)+pow(y-Ry,2));
-        if(dis1<=R){
-            eta1d[y][x]=(half)0;
-            eta2d[y][x]=(half)1;
-        }
-        else{
-            eta1d[y][x]=(half)1;
-            eta2d[y][x]=(half)0;
+        half(*phid)[dimX]=(half(*)[dimX])phi;
+        float dis1=pow(x-(dimX/2+8),2)+pow(y-(dimY/2+8),2);
+        if(dis1<seed){
+            phid[y][x]=(half)1;
         }
     }
-    __global__ void dataprepare_half2(half2 *eta1,half2 *eta2){
+    __global__ void dataprepare_half2(half2 *phi){
         int x=blockIdx.z%unitdimX*uxd2+threadIdx.x;
         int y=blockIdx.z/unitdimX*unity+threadIdx.y;
-        half2(*eta1d)[dimXd2]=(half2(*)[dimXd2])eta1;
-        half2(*eta2d)[dimXd2]=(half2(*)[dimXd2])eta2;
+        half2(*phid)[dimXd2]=(half2(*)[dimXd2])phi;
         int point1_x=x*2,point2_x=x*2+1;
-        float dis1_point1=sqrt(pow(point1_x-Rx,2)+pow(y-Ry,2));
-        float dis1_point2=sqrt(pow(point2_x-Rx,2)+pow(y-Ry,2));
-        float eta1_point1=0,eta2_point1=0,eta1_point2=0,eta2_point2=0;
-        if(dis1_point1<=R){
-            eta1_point1=0;
-            eta2_point1=1;
+        float dis1_point1=pow(point1_x-(dimX/2+8),2)+pow(y-(dimY/2+8),2);
+        float dis1_point2=pow(point2_x-(dimX/2+8),2)+pow(y-(dimY/2+8),2);
+        float phi_point1=0,phi_point2=0;
+        if(dis1_point1<seed){
+            phi_point1=1;
         }
-        else{
-            eta1_point1=1;
-            eta2_point1=0;
+        if(dis1_point2<seed){
+            phi_point2=1;
         }
-        if(dis1_point2<=R){
-            eta1_point2=0;
-            eta2_point2=1;
-        }
-        else{
-            eta1_point2=1;
-            eta2_point2=0;
-        }
-        eta1d[y][x]=__floats2half2_rn(eta1_point1,eta1_point2);
-        eta2d[y][x]=__floats2half2_rn(eta2_point1,eta2_point2);
+        phid[y][x]=__floats2half2_rn(phi_point1,phi_point2);
     }
-
     __global__ void motivation_monitor2_datasychr(highprecision *now,highprecision *last){
         int x=blockIdx.z%unitdimX*unitx+threadIdx.x;
         int y=blockIdx.z/unitdimX*unity+threadIdx.y;
@@ -128,7 +104,6 @@
         }
         return y*unitdimX+x;
     }
-
     #if ((defined HALF)||(defined HALF2))
         __global__ void purelow2high_aftercomputing(purelowprecision *hdata,float *fdata){
             int unitindex_x=blockIdx.z%unitdimX;

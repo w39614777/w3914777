@@ -7,7 +7,7 @@ ratios=[0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9]
 
 for datatype in ["double"]:
     for timestep in ['500','1000','1500','2000']:
-        for strategy in ["AMSTENCIL","GRAM1","GRAM2"]:
+        for strategy in ["AMSTENCIL",'GRAM1','GRAM2']:
             for ratio in   ratios:
                 file=open("./paras/total.h","r+");
                 flist=file.readlines()
@@ -22,7 +22,6 @@ for datatype in ["double"]:
                 file.writelines(flist)
                 file.close()
                 for para in range(1,6):
-                    print(datatype,timestep,strategy,str(ratio),str(para))
                     file=open("./function.h","r+")
                     flist=file.readlines()
                     file.close()

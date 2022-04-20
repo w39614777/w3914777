@@ -3,16 +3,16 @@ import numpy as np
 import os
 if not os.path.exists("./speedup/"):
     os.makedirs("./speedup/")
-for datatype in ['float','double']:
+for datatype in ["double","float"]:
     inittime=None
     for para_index in range(1,6):
-        time=pd.read_csv("./time/"+datatype+'/para'+str(para_index)+"/PURE/time.csv",header=None).mean(axis=1)
+        time=pd.read_csv("./time/500/"+datatype+"/PURE/para"+str(para_index)+"/time.csv",header=None).mean(axis=1)
         inittime=pd.concat([inittime,pd.Series(time)],axis=1)
     inittime=float(inittime.mean(axis=1))
     # gram1
     gram1time=None
     for para_index in range(1,6):
-        time=pd.read_csv("./time/"+datatype+"/para"+str(para_index)+"/GRAM1/time.csv",header=None,index_col=0).mean(axis=1)
+        time=pd.read_csv("./time/500/"+datatype+"/GRAM1/para"+str(para_index)+"/time.csv",header=None,index_col=0).mean(axis=1)
         gram1time=pd.concat([gram1time,pd.Series(time)],axis=1)
     gram1time=gram1time.mean(axis=1)
     gram1speedup=(inittime/gram1time)
@@ -21,17 +21,17 @@ for datatype in ['float','double']:
     # gram2
     gram2time=None
     for para_index in range(1,6):
-        time=pd.read_csv("./time/"+datatype+"/para"+str(para_index)+"/GRAM2/time.csv",header=None,index_col=0).mean(axis=1)
+        time=pd.read_csv("./time/500/"+datatype+"/GRAM2/para"+str(para_index)+"/time.csv",header=None,index_col=0).mean(axis=1)
         gram2time=pd.concat([gram2time,pd.Series(time)],axis=1)
     gram2time=gram2time.mean(axis=1)
     gram2speedup=(inittime/gram2time)
     gram2speedup=pd.DataFrame({'ratio':gram2speedup.index,'speedup':gram2speedup.values})
     gram2speedup.to_csv("./speedup/GRAM-sca_"+datatype+".csv",index=None)
     # amstencil
-    for monitor in range(1,3):
+    for monitor in [1,2]:
         amstenciltime=None
         for para_index in range(1,6):
-            time=pd.read_csv("./time/"+datatype+"/para"+str(para_index)+"/amstencil/monitor"+str(monitor)+"/time.csv",header=None,index_col=0).mean(axis=1)
+            time=pd.read_csv("./time/500/"+datatype+"/AMSTENCIL/monitor"+str(monitor)+"/para"+str(para_index)+"/time.csv",header=None,index_col=0).mean(axis=1)
             amstenciltime=pd.concat([amstenciltime,pd.Series(time)],axis=1)
         amstenciltime=amstenciltime.mean(axis=1)
         amstencilspeedup=(inittime/amstenciltime)

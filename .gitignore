@@ -1,0 +1,15 @@
+graingrowth/result/*
+graingrowth/time/*
+graingrowth/error/*
+graingrowth/speedup/*
+graingrowth/monitor2total/*
+snowflake/result/*
+snowflake/time/*
+snowflake/error/*
+snowflake/speedup/*
+snowflake/monitor2total/*
+sintering/result/*
+sintering/time/*
+sintering/error/*
+sintering/speedup/*
+sintering/monitor2total/*

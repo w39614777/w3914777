@@ -7,7 +7,9 @@ GRAM1=1
 GRAM2=1
 AMSTENCIL=1
 monitors=[1,2]
-ratios=[0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9]
+ratios=[]
+for i in range(1,10):
+    ratios.append("%.6f"%(i*0.1))
 print(ratios)
 datatypes=["double"]
 if not os.path.exists("./error/motivation"):
@@ -31,11 +33,10 @@ if AMSTENCIL:
             for para_index in range(1,6):
                 error_thispara_list=[]
                 for timestep in timsteps:
-                    data_init=pd.read_csv("./result/motivation/"+datatype+"/para"+str(para_index)+"/PURE/"+timestep+"/"+timestep+".csv",index_col=0)
+                    data_init=pd.read_csv("./result/motivation/"+datatype+"/pure/para"+str(para_index)+"/"+timestep+".csv",index_col=0)
                     for ratio in ratios:
-                        data_amstencil=pd.read_csv("./result/motivation/"+datatype+"/para"+str(para_index)+"/AMSTENCIL/monitor"+str(monitor)+"/"+timestep+"/"+str(ratio)+".csv",index_col=0)
+                        data_amstencil=pd.read_csv("./result/motivation/"+datatype+"/amstencil/monitor"+str(monitor)+"/para"+str(para_index)+"/"+timestep+"_"+ratio+".csv",index_col=0)
                         error_thispara_list.append(np.sum(np.sum(abs(data_init-data_amstencil)))/(512*512))
-                # print(error_thispara_list)
                 sum_amstencil=pd.concat([sum_amstencil,pd.Series(error_thispara_list)],axis=1)
             avg_amstencil_error["avg_error"]=sum_amstencil.mean(axis=1)
             if monitor==1:
@@ -59,9 +60,9 @@ if GRAM1:
         for para_index in range(1,6):
             error_thispara_list_gram1=[]
             for timestep in timsteps:
-                data_init=pd.read_csv("./result/motivation/"+datatype+"/para"+str(para_index)+"/PURE/"+timestep+"/"+timestep+".csv",index_col=0)
+                data_init=pd.read_csv("./result/motivation/"+datatype+"/pure/para"+str(para_index)+"/"+timestep+".csv",index_col=0)
                 for ratio in ratios:
-                    data_gram1=pd.read_csv("./result/motivation/"+datatype+"/para"+str(para_index)+"/GRAM1/"+timestep+"/"+str(ratio)+".csv",index_col=0)
+                    data_gram1=pd.read_csv("./result/motivation/"+datatype+"/gram1/para"+str(para_index)+"/"+timestep+"_"+ratio+".csv",index_col=0)
                     error_thispara_list_gram1.append(np.sum(np.sum(abs(data_init-data_gram1)))/(512*512))
             sum_gram1=pd.concat([sum_gram1,pd.Series(error_thispara_list_gram1)],axis=1)
         avg_gram1_error["avg_error"]=sum_gram1.mean(axis=1)
@@ -84,9 +85,9 @@ if GRAM2:
         for para_index in range(1,6):
             error_thispara_list_gram2=[]
             for timestep in timsteps:
-                data_init=pd.read_csv("./result/motivation/"+datatype+"/para"+str(para_index)+"/PURE/"+timestep+"/"+timestep+".csv",index_col=0)
+                data_init=pd.read_csv("./result/motivation/"+datatype+"/pure/para"+str(para_index)+"/"+timestep+".csv",index_col=0)
                 for ratio in ratios:
-                    data_gram2=pd.read_csv("./result/motivation/"+datatype+"/para"+str(para_index)+"/GRAM2/"+timestep+"/"+str(ratio)+".csv",index_col=0)
+                    data_gram2=pd.read_csv("./result/motivation/"+datatype+"/gram2/para"+str(para_index)+"/"+timestep+"_"+ratio+".csv",index_col=0)
                     error_thispara_list_gram2.append(np.sum(np.sum(abs(data_init-data_gram2)))/(512*512))
             sum_gram2=pd.concat([sum_gram2,pd.Series(error_thispara_list_gram2)],axis=1)
         avg_gram2_error["avg_error"]=sum_gram2.mean(axis=1)

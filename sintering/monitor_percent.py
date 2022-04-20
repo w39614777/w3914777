@@ -7,11 +7,13 @@ datatypes=["float","double"]
 monitors=['1','2']
 for datatype in datatypes:
     for monitor in monitors:
+        totaltimepath="time/500/"+datatype+"/AMSTENCIL/monitor"+monitor+"/"
+        monitortimepath="time/500/"+datatype+"/without_M"+monitor+"_conversion/"
         total_time=None
         monitor_time=None
         for paraindex in range(1,6):
-            total_time_thispara=pd.read_csv("./time/"+datatype+"/para"+str(paraindex)+'/with_M'+monitor+'_monitor/time.csv',header=None,index_col=0).mean(axis=1)
-            monitor_time_thispara=pd.read_csv("./time/"+datatype+"/para"+str(paraindex)+'/without_M'+monitor+'_monitor/time.csv',header=None,index_col=0).mean(axis=1)
+            total_time_thispara=pd.read_csv(totaltimepath+"para"+str(paraindex)+"/time.csv",header=None,index_col=0).mean(axis=1)
+            monitor_time_thispara=pd.read_csv(monitortimepath+"para"+str(paraindex)+"/time.csv",header=None,index_col=0).mean(axis=1)
             total_time=pd.concat([total_time,pd.Series(total_time_thispara)],axis=1)
             monitor_time=pd.concat([monitor_time,pd.Series(monitor_time_thispara)],axis=1)
         total_time=total_time.mean(axis=1)
