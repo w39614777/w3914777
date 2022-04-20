@@ -20,8 +20,8 @@ Table 3 for Snowflake Crystal Growth:
         python end2enderror.py
         python get_speedup.py
     Files to store results:
-        The error of simulation : w3914777/snowflake/error/end2end/
-        The speedup of simulation:w3914777/snowflake/speedup/
+        w3914777/snowflake/error/end2end/
+        w3914777/snowflake/speedup/
         
         
 Table 3 for Solid-State Sintering:
@@ -33,8 +33,8 @@ Table 3 for Solid-State Sintering:
         python get_speedup.py 
         python end2enderror.py 
     Files to store results:
-        The error of simulation : w3914777/sintering/error/end2end/
-        The speedup of simulation:w3914777/sintering/speedup/
+        w3914777/sintering/error/end2end/
+        w3914777/sintering/speedup/
         
         
 Table 3 for Grain growth:
