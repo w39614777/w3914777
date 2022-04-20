@@ -98,7 +98,9 @@ Figure 10:
 Table 4 for Snowflake Crystal Growth:
 
     Commands to run:
-        python time_without_monitorandconversion.py
+        cd w3914777/snowflake
+        python monitor_independent_withmonitor.py
+        python monitor_independent_withoutmonitor.py
         python monitor_percent.py
      Fils to store results:
         w3914777/snowflake/monitor2total/
@@ -106,9 +108,9 @@ Table 4 for Snowflake Crystal Growth:
         
 Table 4 for Solid-State Sintering:
 
-    Commands to run:
-        python monitor_independent_withoutmonitor.py
-        python monitor_independent_withmonitor.py 
+    Commands to run: 
+        cd w3914777/sintering
+        python time_without_monitorandconversion.py
         python monitor_percent.py 
      Fils to store results:
         w3914777/graingrowth/monitor2total/  
@@ -117,6 +119,7 @@ Table 4 for Solid-State Sintering:
 Table 4 for Grain growth:
 
     Commands to run:
+        cd w3914777/graingrowth
         python monitor_independent_withoutmonitor.py
         python monitor_independent_withmonitor.py 
         python monitor_percent.py 
