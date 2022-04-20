@@ -11,6 +11,9 @@ Build
 
     git clone https://github.com/w39614777/w3914777.git
     
+    
+Running    
+    
 Table 3 for Snowflake Crystal Growth:
 
     Commands to run:
