@@ -11,123 +11,83 @@ Build
 
     git clone https://github.com/w39614777/w3914777.git
     
-
-Running for sintering:
-  
-    cd sintering
-    nvidia-smi -lgc 1410 -i GPU_Number
-    
-    For execution time (in microsecond) of the sintering kernels:(Table 1)
-      Commands to run:
-        nvcc sinteringhalf.cu -o sinteringhalf --std=c++11 -arch=sm_80
-        nvcc sinteringfp64.cu -o sinteringfp64 --std=c++11 -arch=sm_80
-        nvcc sinteringfp32.cu -o sinteringfp32 --std=c++11 -arch=sm_80
-        ncu --set full -o sinteringhalf ./sinteringhalf
-        ncu --set full -o sinteringfp64 ./sinteringfp64
-        ncu --set full -o sinteringfp32 ./sinteringfp32
-       Files to store results:
-        The execution time of FP16 in file sinteringhalf.ncu-rep
-        The execution time of FP64 in file sinteringfp64.ncu-rep
-        The execution time of FP32 in file sinteringfp32.ncu-rep
-        
-    For motivation:(Figure 8)
-      Commands to run:(The following 2 commands should be executed serially)
-        python motivation_run.py //This command will get the motivation simulation result of AMPStencil,GRAM-clu,GRAM-sca and Pure FP64/FP32.
-        python motivationerror.py //This command will get the average absolute error of AMPStencil,GRAM-clu,GRAM-sca relative to Pure FP64/FP32.
-      Fils to store results:
-        The error of  GRAM-clu(FP64 mixed with FP16) in file sintering/error/motivation/gram1_double.csv
-        The error of  GRAM-sca(FP64 mixed with FP16) in file sintering/error/motivation/gram2_double.csv
-        The error of  AMPStencil-spa(FP64 mixed with FP16) in file sintering/error/motivation/amstencil_double_monitor1.csv
-        The error of  AMPStencil-tem(FP64 mixed with FP16) in file sintering/error/motivation/amstencil_double_monitor2.csv
-
-    For end2end:(Table 3)
+Table 3 for Snowflake Crystal Growth:
+    Commands to run:
+        cd w3914777/snowflake
+        python end2end_mix.py
+        python end2end_pure.py
+        python end2enderror.py
+        python get_speedup.py
+    Files to store results:
+        The error of simulation : w3914777/snowflake/error/end2end/
+        The speedup of simulation:w3914777/snowflake/speedup/
+Table 3 for Solid-State Sintering:
       Commands to run:(The following 4 commands should be executed serially)
-        python end2end_run1.py//This command will get the simulation result of AMPStencil,GRAM-clu,GRAM-sca and Pure FP64/FP32.
-        pyrhon end2end_run2.py //This command will get the simulation duration of AMPStencil,GRAM-clu,GRAM-sca and Pure FP64/FP32.
-        python get_speedup.py //This command will get the speedup of AMPStencil,GRAM-clu,GRAM-sca relative to Pure FP64/FP32
-        python end2enderror.py //This command will get the average absolute error of AMPStencil,GRAM-clu,GRAM-sca relative to Pure FP64/FP32
-      Fils to store results:
-        The error of  GRAM-clu(FP64 mixed with FP16) in file sintering/error/end2end/gram1_double_error.csv
-        The error of  GRAM-sca(FP64 mixed with FP16) in file sintering/error/end2end/gram2_double_error.csv
-        The error of  AMPStencil-spa(FP64 mixed with FP16) in file sintering/error/end2end/monitor1/amstencil_double_error.csv
-        The error of  AMPStencil-tem(FP64 mixed with FP16) in file sintering/error/end2end/monitor2/amstencil_double_error.csv
-        The error of  GRAM-clu(FP32 mixed with FP16) in file sintering/error/end2end/gram1_float_error.csv
-        The error of  GRAM-sca(FP32 mixed with FP16) in file sintering/error/end2end/gram2_float_error.csv
-        The error of  AMPStencil-spa(FP32 mixed with FP16) in file sintering/error/end2end/monitor1/amstencil_float_error.csv
-        The error of  AMPStencil-tem(FP32 mixed with FP16) in file sintering/error/end2end/monitor2/amstencil_float_error.csv
-        The speedup of GRAM-clu(FP64 mixed with FP16) in file sintering/speedup/duouble/gram1/gram1.csv
-        The speedup of GRAM-sca(FP64 mixed with FP16) in file sintering/speedup/duouble/gram2/gram2.csv
-        The speedup of AMPStencil-spa(FP64 mixed with FP16) in file sintering/speedup/duouble/amstencil/monitor1/amstencil.csv
-        The speedup of AMPStencil-sca(FP64 mixed with FP16) in file sintering/speedup/duouble/amstencil/monitor2/amstencil.csv      
-        The speedup of GRAM-clu(FP32 mixed with FP16) in file sintering/speedup/float/gram1/gram1.csv
-        The speedup of GRAM-sca(FP32 mixed with FP16) in file sintering/speedup/float/gram2/gram2.csv
-        The speedup of AMPStencil-spa(FP32 mixed with FP16) in file sintering/speedup/float/amstencil/monitor1/amstencil.csv
-        The speedup of AMPStencil-sca(FP32 mixed with FP16) in file sintering/speedup/float/amstencil/monitor2/amstencil.csv
-        
-     For overhead of AMPStencil:(Table 4)
-      Commands to run:(The following 2 commands should be executed serially)
-        python time_without_monitorandconversion.py//This command will get the AMPStencil simulation duration exclude monitor
-        python monitor_percent.py //This command will get the percentage of monitor duration in the total duration
-      Fils to store results:
-        The monitor percentage of AMPStencil-spa(FP64 mixed with FP16) in file sintering/monitor:total/500/double/monitor1/percentage.csv
-        The monitor percentage of AMPStencil-tem(FP64 mixed with FP16) in file sintering/monitor:total/500/double/monitor2/percentage.csv
-        The monitor percentage of AMPStencil-spa(FP32 mixed with FP16) in file sintering/monitor:total/500/float/monitor1/percentage.csv
-        The monitor percentage of AMPStencil-tem(FP32 mixed with FP16) in file sintering/monitor:total/500/float/monitor2/percentage.csv     
-        
-        
-Running for graingrowth:
-  
-    cd graingrowth
-    nvidia-smi -lgc 1410 -i GPU_Number
-    
-    For motivation:(Figure 9)
-      Commands to run:(The following 3 commands should be executed serially)
-        python motiavtion_mix.py //This command will get the motivation simulation result of AMPStencil,GRAM-clu,GRAM-sca
-        python motivation_pure.py//This command will get the motivation simulation result of Pure FP64/FP32
-        python motivationerror.py //This command will get the average absolute error of AMPStencil,GRAM-clu,GRAM-sca relative to Pure FP64/FP32
-      Fils to store results:
-        The error of  GRAM-clu(FP64 mixed with FP16) in file graingrowth/error/motivation/gram1_double.csv
-        The error of  GRAM-sca(FP64 mixed with FP16) in file graingrowth/error/motivation/gram2_double.csv
-        The error of  AMPStencil-spa(FP64 mixed with FP16) in file graingrowth/error/motivation/amstencil_double_monitor1.csv
-        The error of  AMPStencil-tem(FP64 mixed with FP16) in file graingrowth/error/motivation/amstencil_double_monitor2.csv
-        
-    For end2end:(Table 3)
-      Commands to run:(The following 4 commands should be executed serially)
-        python end2end_mix.py //This command will get the simulation result and simulation duration of AMPStencil,GRAM-clu,GRAM-sca
-        python end2end_pure.py //This command will get the simualtion result and simulation duaration of Pure FP64/FP32
-        python end2enderror.py //This command will get the average absolute error of AMPStencil,GRAM-clu,GRAM-sca relative to Pure FP64/FP32
-        python get_speedup.py //This command will get the speedup of AMPStencil,GRAM-clu,GRAM-sca relative to Pure FP64/FP32
-      Fils to store results:
-        The error of  GRAM-clu(FP64 mixed with FP16) in file graingrowth/error/end2end/gram1_double_error.csv
-        The error of  GRAM-sca(FP64 mixed with FP16) in file graingrowth/error/end2end/gram2_double_error.csv
-        The error of  AMPStencil-spa(FP64 mixed with FP16) in file graingrowth/error/end2end/monitor1/amstencil_double_error.csv
-        The error of  AMPStencil-tem(FP64 mixed with FP16) in file graingrowth/error/end2end/monitor2/amstencil_double_error.csv
-        The error of  GRAM-clu(FP32 mixed with FP16) in file graingrowth/error/end2end/gram1_float_error.csv
-        The error of  GRAM-sca(FP32 mixed with FP16) in file graingrowth/error/end2end/gram2_float_error.csv
-        The error of  AMPStencil-spa(FP32 mixed with FP16) in file graingrowth/error/end2end/monitor1/amstencil_float_error.csv
-        The error of  AMPStencil-tem(FP32 mixed with FP16) in file graingrowth/error/end2end/monitor2/amstencil_float_error.csv
-        The speedup of GRAM-clu(FP64 mixed with FP16) in file graingrowth/speedup/double/gram1/gram1.csv
-        The speedup of GRAM-sca(FP64 mixed with FP16) in file graingrowth/speedup/double/gram2/gram2.csv
-        The speedup of AMPStencil-spa(FP64 mixed with FP16) in file graingrowth/speedup/double/amstencil/monitor1/amstencil.csv
-        The speedup of AMPStencil-sca(FP64 mixed with FP16) in file graingrowth/speedup/double/amstencil/monitor2/amstencil.csv
-        The speedup of GRAM-clu(FP32 mixed with FP16) in file graingrowth/speedup/float/gram1/gram1.csv
-        The speedup of GRAM-sca(FP32 mixed with FP16) in file graingrowth/speedup/float/gram2/gram2.csv
-        The speedup of AMPStencil-spa(FP32 mixed with FP16) in file graingrowth/speedup/float/amstencil/monitor1/amstencil.csv
-        The speedup of AMPStencil-sca(FP32 mixed with FP16) in file graingrowth/speedup/float/amstencil/monitor2/amstencil.csv
-        
-     For overhead of AMPStencil:(Table 4)
-      Commands to run:(The following 3 commands should be executed serially)
-        python monitor_independent_withoutmonitor.py//This command will get the AMPStencil simulation duration exclude monitor
-        python monitor_independent_withmonitor.py // This command will get the AMPStencil simulation duration include monitor
-        python monitor_percent.py //This command will get the percentage of monitor duration in the total duration
-      Fils to store results:
-        The monitor percentage of AMPStencil-spa(FP64 mixed with FP16) in file graingrowth/monitor:total/500/double/monitor1/percentage.csv
-        The monitor percentage of AMPStencil-tem(FP64 mixed with FP16) in file graingrowth/monitor:total/500/double/monitor2/percentage.csv
-        The monitor percentage of AMPStencil-spa(FP32 mixed with FP16) in file graingrowth/monitor:total/500/float/monitor1/percentage.csv
-        The monitor percentage of AMPStencil-tem(FP32 mixed with FP16) in file graingrowth/monitor:total/500/float/monitor2/percentage.csv
-        
-        
-Running for snow:  
-  
-    The running commands and files to store results is similar to graingrowth.      
+        cd w3914777/sintering
+        python end2end_run1.py
+        pyrhon end2end_run2.py 
+        python get_speedup.py 
+        python end2enderror.py 
+    Files to store results:
+        The error of simulation : w3914777/sintering/error/end2end/
+        The speedup of simulation:w3914777/sintering/speedup/
+Table 3 for Grain growth:
+    Commands to run:
+        cd w3914777/graingrowth
+        python end2end_mix.py
+        python end2end_pure.py
+        python end2enderror.py
+        python get_speedup.py
+    Files to store results:
+        w3914777/graingrowth/error/end2end/
+        w3914777/graingrowth/speedup/
+Figure 7:
+    Commands to run:
+        cd w3914777/snowflake
+        python motiavtion_mix.py 
+        python motivation_pure.py
+        python motivationerror.py
+    Fils to store results:
+        w3914777/snowflake/error/motivation
+Figure 8:
+    Commands to run:
+        cd w3914777/sintering
+        python motivation_run.py 
+        python motivationerror.py
+    Fils to store results:
+        w3914777/sintering/error/motivation
+Figure 9:
+    Commands to run:
+        cd w3914777/graingrowth
+        python motiavtion_mix.py 
+        python motivation_pure.py
+        python motivationerror.py
+    Fils to store results:
+         w3914777/graingrowth/error/motivation
+Figure 10:
+    Commands to run:
+        cd w3914777/snowflake
+        python simulation_result.py
+    Fils to store results:
+        w3914777/snowflake/simulation_result
+Table 4 for Snowflake Crystal Growth:
+    Commands to run:
+        python time_without_monitorandconversion.py
+        python monitor_percent.py
+     Fils to store results:
+        w3914777/snowflake/monitor:total
+Table 4 for Solid-State Sintering:
+    Commands to run:
+        python monitor_independent_withoutmonitor.py
+        python monitor_independent_withmonitor.py 
+        python monitor_percent.py 
+     Fils to store results:
+        w3914777/graingrowth/monitor:total         
+Table 4 for Grain growth:
+    Commands to run:
+        python monitor_independent_withoutmonitor.py
+        python monitor_independent_withmonitor.py 
+        python monitor_percent.py 
+     Fils to store results:
+        w3914777/graingrowth/monitor:total        
  
