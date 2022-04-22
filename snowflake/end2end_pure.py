@@ -9,6 +9,7 @@ for datatype in ["double","float"]:
     file.close()
     flist[17]="   typedef "+datatype+" highprecision;\n"
     flist[18]= "   int timesteps=500;\n"
+    flist[26]="   #define End2end\n"
     flist[24]="   #define PURE\n"
     file=open("./paras/total.h","w+")
     file.writelines(flist)

@@ -18,8 +18,8 @@ using namespace nvcuda;
 // #define DEBUG_PRINT
 #define PURE
 // define GET_TIME表示要获取程序的执行时间，GET_RESULT表示获取程序的结果,GET_MonitorTIME表示获取amstencil的monitor时间,monitor_conversion_independent表示获取不加monitor和type conversion的时间
-#define GET_RESULT
-#define Motivation
+#define GET_TIME
+#define End2end
 #define Monitor2
 #ifdef AMSTENCIL
     typedef half2 lowprecision;

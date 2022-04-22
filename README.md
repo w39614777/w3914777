@@ -33,7 +33,7 @@ Table 3 for Solid-State Sintering:
       Commands to run:(The following 4 commands should be executed serially)
         cd w3914777/sintering
         python end2end_run1.py
-        pyrhon end2end_run2.py 
+        python end2end_run2.py 
         python get_speedup.py 
         python end2enderror.py 
     Files to store results:
@@ -108,7 +108,7 @@ Table 4 for Snowflake Crystal Growth:
         
 Table 4 for Solid-State Sintering:
 
-    Commands to run: 
+    Commands to run: (This experiment should to be behind experiment Table 3 for Solid-State Sintering)
         cd w3914777/sintering
         python time_without_monitorandconversion.py
         python monitor_percent.py 

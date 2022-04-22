@@ -1,6 +1,6 @@
 #ifndef FUNCTION_H
     #define FUNCTION_H
-    #include"./paras/para3.h"
+    #include"./paras/para5.h"
     #if ((defined PURE)||(defined Motivation))
         __global__ void kernel1_pure(highprecision *etaa,highprecision *etab,highprecision* etaa_lap,highprecision *dfdetaa,highprecision *etaa_out){
             int unitindex_x=blockIdx.z%unitdimX;

@@ -1,6 +1,6 @@
 #ifndef TOOL_H
     #define TOOL_H
-    #include"./paras/para3.h"
+    #include"./paras/para5.h"
     template<typename T>
     void writetocsv(string filename,T* data,int X,int Y){
         ofstream f(filename);

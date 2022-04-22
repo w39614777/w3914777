@@ -3,6 +3,7 @@ import sys
 for datatype in ["double","float"]:
     for strategy in ['AMSTENCIL','GRAM1',"GRAM2","PURE"]:
         os.system("rm -rf ./time/500/"+datatype+"/without_M1_conversion")
+        os.system("rm -rf ./time/500/"+datatype+"/without_M2_conversion")
 thresholds=None
 monitors=[1,2]
 datatypes=["float","double"]
@@ -28,7 +29,10 @@ for monitor in monitors:
             fcu=open("function.h","w+")
             fcu.writelines(flist)
             fcu.close()
-            time_path='time/'+timestep+"/"+datatype+"/without_M1_conversion/para"+str(para_index)+"/"
+            if(monitor==1):
+                time_path='time/'+timestep+"/"+datatype+"/without_M1_conversion/para"+str(para_index)+"/"
+            if(monitor==2):
+                time_path='time/'+timestep+"/"+datatype+"/without_M2_conversion/para"+str(para_index)+"/"
             if not os.path.exists(time_path):
                 os.makedirs(time_path)
             if not os.path.exists(time_path+"time.csv"):

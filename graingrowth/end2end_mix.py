@@ -1,4 +1,3 @@
-from itertools import count
 import os
 import sys
 
@@ -12,10 +11,10 @@ for i in range(1,101):
     ratios.append(str(round(0.01*i,2)))
 
 for datatype in ["double","float"]:
-    for strategy in ["AMSTENCIL","GRAM1","GRAM2"]:
+    for strategy in ["AMSTENCIL","GRAM1","GRAM2"]:#hhhh  
         if strategy=="AMSTENCIL":
             thresholds=None
-            for monitor in range(1,3):
+            for monitor in range(1,3):#hhhh 
                 if monitor==1:
                     thresholds=[0.000001,0.00001,0.0001,0.001,0.1,0.15,0.2,0.25,0.3,0.35,0.4,0.45,0.5,0.55,0.6,0.65,0.7,0.75,0.8,0.85,0.9,0.91,0.92,0.93,0.94,0.95,0.96,0.97,0.98,0.99]
                 if monitor==2:
@@ -28,6 +27,7 @@ for datatype in ["double","float"]:
                     flist[18]= "   int timesteps=500;\n"
                     flist[21]="   const highprecision threshold="+str(threshold)+";\n"
                     flist[24]="   #define AMSTENCIL\n"
+                    flist[26]="   #define End2end\n"
                     flist[27]="   #define Monitor"+str(monitor)+"\n"
                     flist[45]="   #define monitor_conversion_dependent\n"
                     file=open("./paras/total.h","w+")

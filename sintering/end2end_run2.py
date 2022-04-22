@@ -51,6 +51,7 @@ for datatype in datatypes:
                     fcu=open("function.h","w+")
                     fcu.writelines(flist)
                     fcu.close()
+                    time_path="./time/"+timestep+"/"+datatype+"/"+strategy+"/"
                     time_path=time_path+"monitor"+str(monitor)+"/para"+str(para_index)+"/"
                     for threshold in thresholds:
                         fparalist[7]="const highprecision threshold="+str(threshold)+";\n"

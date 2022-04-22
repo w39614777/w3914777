@@ -15,16 +15,16 @@
    #include <math.h>
    using namespace std;
    using namespace nvcuda;
-   typedef double highprecision;
-   int timesteps=2000;
+   typedef float highprecision;
+   int timesteps=500;
    const int dimX=512,dimY=512;
    const int unitx=16,unity=16,unitdimX=dimX/unitx,unitdimY=dimY/unity,uxd2=unitx/2,uxd2s1=uxd2-1,uxs1=unitx-1,uys1=unity-1,dimXd2=dimX/2,unitNums=unitdimX*unitdimY;
-   const highprecision threshold=1e-4;
-  const highprecision ratio=0.9;
+   const highprecision threshold=0.99;
+  const highprecision ratio=1.0;
    // #define PRINT_INFO
-   #define GRAM2
+   #define AMSTENCIL
    // define GET_TIME表示要获取程序的执行时间，GET_RESULT表示获取程序的结果,GET_MonitorTIME表示获取amstencil的monitor时间,monitor_conversion_independent表示获取不加monitor和type conversion的时间
-   #define Motivation
+   #define End2end
    #define Monitor2
    #ifdef AMSTENCIL
       typedef half2 lowprecision;
@@ -43,7 +43,7 @@
       typedef half2 purelowprecision;
       const int purelowprecision_dimX=dimXd2;
    #endif
-   #define monitor_conversion_dependent
+   #define monitor_conversion_independent
    #define pi 3.1415926
    #define CHECK_ERROR(error) checkCudaError(error, __FILE__, __LINE__)
    #define CHECK_STATE(msg) checkCudaState(msg, __FILE__, __LINE__)
