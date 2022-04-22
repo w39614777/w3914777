@@ -8,7 +8,6 @@ GRAM2=1
 AMSTENCIL=1
 monitors=[1,2]
 ratios=[0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9]
-print(ratios)
 datatypes=["double"]
 if not os.path.exists("./error/motivation"):
     os.makedirs("./error/motivation")
@@ -35,7 +34,6 @@ if AMSTENCIL:
                     for ratio in ratios:
                         data_amstencil=pd.read_csv("./result/motivation/"+datatype+"/para"+str(para_index)+"/AMSTENCIL/monitor"+str(monitor)+"/"+timestep+"/"+str(ratio)+".csv",index_col=0)
                         error_thispara_list.append(np.sum(np.sum(abs(data_init-data_amstencil)))/(512*512))
-                # print(error_thispara_list)
                 sum_amstencil=pd.concat([sum_amstencil,pd.Series(error_thispara_list)],axis=1)
             avg_amstencil_error["avg_error"]=sum_amstencil.mean(axis=1)
             if monitor==1:

@@ -32,7 +32,6 @@ for datatype in datatypes:
                     if os.system("nvcc main.cu -o main --std=c++11 -arch=sm_80 -w")==0:
                         os.system("./main "+str(para_index)+" "+datatype)
                     else:
-                        print(strategy,ratio,str(para_index))
                         sys.exit(1)
                 else:
                     for ratio in ratios:
@@ -52,11 +51,9 @@ for datatype in datatypes:
                                 if os.system("nvcc main.cu -o main --std=c++11 -arch=sm_80 -w")==0:
                                     os.system("./main "+str(para_index)+" "+datatype)
                                 else:
-                                    print(strategy,ratio,str(para_index))
                                     sys.exit(1)                                  
                         else:
                             if os.system("nvcc main.cu -o main --std=c++11 -arch=sm_80 -w")==0:
                                 os.system("./main "+str(para_index)+" "+datatype)
                             else:
-                                print(strategy,ratio,str(para_index))
                                 sys.exit(1)                          

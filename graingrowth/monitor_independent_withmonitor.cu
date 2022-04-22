@@ -76,8 +76,6 @@ int main(int argc,char* argv[]){
                 cudaDeviceSynchronize();
                 get_type<<<grids_detect,blocks_detect>>>(max_diff,type_old,type_curr);
                 cudaDeviceSynchronize();
-                // writetocsv("max"+to_string(i)+".csv",max_diff,unitdimX,unitdimY);
-                // writetocsv("type"+to_string(i)+".csv",type_curr,unitdimX,unitdimY);
                 data_sychro_duringcomputation<<<datasychronduring_grids,datasychronduring_blocks>>>(eta1,eta2,heta1,heta2,type_old,type_curr);
                 cudaDeviceSynchronize();
             }

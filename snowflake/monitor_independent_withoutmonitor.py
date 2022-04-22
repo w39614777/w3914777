@@ -31,7 +31,6 @@ for datatype in ["double","float"]:
                     os.makedirs(timepath)
                 if not os.path.exists(timepath+"time.csv"):
                     os.mknod(timepath+"time.csv")
-                print(timepath+"time.csv",str(threshold))
                 file=open("./function.h","r+")
                 flist=file.readlines()
                 file.close()

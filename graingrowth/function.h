@@ -74,7 +74,7 @@
             if(type==1){
                 int unitindex_xs1=unitindex_x==0?unitdimX-1:unitindex_x-1;
                 int unitindex_xa1=unitindex_x==unitdimX-1?0:unitindex_x+1;
-                //index计算
+                //
                 #ifdef AMSTENCIL
                     int x=x_start+x_offset;
                 #else

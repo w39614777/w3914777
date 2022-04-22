@@ -62,8 +62,6 @@ for monitor in monitors:
                     f=open(time_path+"time.csv","w+")
                     f.writelines(this_time_list)
                     f.close()
-                    print(datatype,para_index,threshold)
                 else:
-                    print("error--",datatype,para_index,threshold)
                     sys.exit(1)
             

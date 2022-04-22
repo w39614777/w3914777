@@ -35,5 +35,4 @@ for datatype in ["double"]:
             if os.system("nvcc purehigh.cu -o purehigh --std=c++11 -arch=sm_80 -w")==0:
                 os.system("./purehigh "+resultpath+timestep+".csv")
             else:
-                print(datatype,str(para))
                 sys.exit(1)                                        

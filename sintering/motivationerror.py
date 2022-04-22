@@ -10,7 +10,6 @@ monitors=[1,2]
 ratios=[]
 for i in range(1,10):
     ratios.append("%.6f"%(i*0.1))
-print(ratios)
 datatypes=["double"]
 if not os.path.exists("./error/motivation"):
     os.makedirs("./error/motivation")

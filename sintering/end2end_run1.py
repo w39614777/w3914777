@@ -76,12 +76,10 @@ for datatype in datatypes:
                                 f.writelines(this_time_list)
                                 f.close()
                         else:
-                            print(strategy,str(threshold),str(para_index))
                             sys.exit(1)
             elif strategy=="GRAM1" or strategy=="GRAM2":
                 time_path=time_path+"para"+str(para_index)+"/"
                 for ratio in ratios:
-                    print(datatype,str(para_index),ratio)
                     fparalist[8]="const highprecision ratio="+ratio+";\n"
                     fpara=open("./paras/para"+str(para_index)+".h","w+")
                     fpara.writelines(fparalist)
@@ -109,7 +107,6 @@ for datatype in datatypes:
                             f.writelines(this_time_list)
                             f.close()                            
                     else:
-                        print(strategy,ratio,str(para_index))
                         sys.exit(1)                    
 
             else:
@@ -140,5 +137,4 @@ for datatype in datatypes:
                         f.writelines(this_time_list)
                         f.close()     
                 else:
-                    print(strategy,str(para_index),os.system("nvcc main.cu -o main --std=c++11 -arch=sm_80"))
                     sys.exit(1)   

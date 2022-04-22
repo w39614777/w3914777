@@ -84,8 +84,6 @@ int main(int argc,char* argv[]){
                 #endif
                 get_type<<<grids_detect,blocks_detect>>>(max_diff,type_old,type_curr);
                 cudaDeviceSynchronize();
-                // writetocsv("max"+to_string(i)+".csv",max_diff,unitdimX,unitdimY);
-                // writetocsv("type"+to_string(i)+".csv",type_curr,unitdimX,unitdimY);
                 data_sychro_duringcomputation<<<datasychronduring_grids,datasychronduring_blocks>>>(eta1,eta2,heta1,heta2,type_old,type_curr);
                 cudaDeviceSynchronize();
             }
@@ -108,7 +106,6 @@ int main(int argc,char* argv[]){
     ofstream ftime("time_tmp.csv");
     ftime<<elapsedmix;
     ftime.close();
-    //每个程序跑五次测试性能，最后一次记录计算结果
     if(string(argv[1])=="4"){
         string path=string(argv[2]);
         data_sychro_aftercomputation<<<grids_mix,blocks_mix>>>(eta2,heta2,type_curr);

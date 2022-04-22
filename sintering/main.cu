@@ -3,7 +3,6 @@
 #include <sys/types.h>
 #include<queue>
 int main(int argc,char* argv[]){
-    //空间申请
     highprecision *con,*eta1,*eta2,*eta1_lap,*eta2_lap,*con_lap,*dummy,*dummy_lap,*dfdcon,*dfdeta1,*dfdeta2,*eta1_out,*eta2_out;
     CHECK_ERROR(cudaMallocManaged((void**)&con,sizeof(highprecision)*dimX*dimY));
     CHECK_ERROR(cudaMallocManaged((void**)&eta1,sizeof(highprecision)*dimX*dimY));
@@ -43,7 +42,6 @@ int main(int argc,char* argv[]){
     CHECK_ERROR(cudaMallocManaged((void**)&max_diff_con,sizeof(highprecision)*unitdimX*unitdimY));
     #endif
 
-    // 数据准备
     for(int y=1;y<=dimY;y++){
         for(int x=1;x<=dimX;x++){
             float dis1=sqrt(pow(x-Rx1,2)+pow(y-Ry1,2));
@@ -283,7 +281,6 @@ int main(int argc,char* argv[]){
             dataprepare<<<grids_dataprepare,blocks_dataprepare>>>(eta1,heta1);
             dataprepare<<<grids_dataprepare,blocks_dataprepare>>>(eta2,heta2);
             int highprecisionnum=unitdimX*unitdimY-unitdimX*unitdimY*ratio,sum=0;
-            cout<<highprecisionnum<<" "<<ratio<<endl;
             #ifdef Monitor1
             get_max_diff1<<<grids_detect,blocks_detect>>>(con,max_diff_con);
             #endif
@@ -471,7 +468,6 @@ int main(int argc,char* argv[]){
                     mkdir(s.c_str(),0777);
                 }
                 writetocsv(s+to_string(timesteps)+".csv",con,dimX,dimY); 
-                cout<<s+to_string(timesteps)+".csv"<<endl;
             #endif
             #ifdef AMSTENCIL
                 data_sychro_aftercomputation<<<grids_dataprepare,blocks_dataprepare>>>(con,hcon,type_con);
@@ -500,7 +496,6 @@ int main(int argc,char* argv[]){
                     mkdir(s.c_str(),0777);
                 }
                 writetocsv(s+to_string(timesteps)+"_"+thresholdstr+".csv",con,dimX,dimY);
-                cout<<s+to_string(timesteps)+"_"+thresholdstr+".csv"<<endl;
             #endif
             
             #ifdef GRAM1
@@ -515,7 +510,6 @@ int main(int argc,char* argv[]){
                     mkdir(s.c_str(),0777);
                 }
                 writetocsv(s+to_string(timesteps)+"_"+to_string(ratio)+".csv",con,dimX,dimY);
-                cout<<s+to_string(timesteps)+"_"+to_string(ratio)+".csv"<<endl;
             #endif
 
             #ifdef GRAM2
@@ -530,7 +524,6 @@ int main(int argc,char* argv[]){
                     mkdir(s.c_str(),0777);
                 }
                 writetocsv(s+to_string(timesteps)+"_"+to_string(ratio)+".csv",con,dimX,dimY);
-                cout<<s+to_string(timesteps)+"_"+to_string(ratio)+".csv"<<endl;
             #endif
         #endif
         #ifdef Motivation
@@ -552,7 +545,6 @@ int main(int argc,char* argv[]){
                     mkdir(s.c_str(),0777);
                 }
                 writetocsv(s+to_string(timesteps)+".csv",con,dimX,dimY); 
-                cout<<s+to_string(timesteps)+".csv"<<endl;
             #endif
             #ifdef AMSTENCIL
                 data_sychro_aftercomputation<<<grids_dataprepare,blocks_dataprepare>>>(con,hcon,type_con);
@@ -575,7 +567,6 @@ int main(int argc,char* argv[]){
                     mkdir(s.c_str(),0777);
                 }
                 writetocsv(s+to_string(timesteps)+"_"+to_string(ratio)+".csv",con,dimX,dimY);
-                cout<<s+to_string(timesteps)+"_"+to_string(ratio)+".csv"<<endl;
             #endif
         
             #ifdef GRAM1
@@ -590,7 +581,6 @@ int main(int argc,char* argv[]){
                     mkdir(s.c_str(),0777);
                 }
                 writetocsv(s+to_string(timesteps)+"_"+to_string(ratio)+".csv",con,dimX,dimY);
-                cout<<s+to_string(timesteps)+"_"+to_string(ratio)+".csv"<<endl;
             #endif
 
             #ifdef GRAM2
@@ -605,11 +595,9 @@ int main(int argc,char* argv[]){
                     mkdir(s.c_str(),0777);
                 }
                 writetocsv(s+to_string(timesteps)+"_"+to_string(ratio)+".csv",con,dimX,dimY);
-                cout<<s+to_string(timesteps)+"_"+to_string(ratio)+".csv"<<endl;
             #endif
         #endif
     #endif
-    // 释放空间
     CHECK_ERROR(cudaFree(con));
     CHECK_ERROR(cudaFree(eta1));
     CHECK_ERROR(cudaFree(eta2));

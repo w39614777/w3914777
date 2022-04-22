@@ -31,7 +31,6 @@ for datatype in ["double","float"]:
                     os.makedirs(timepath)
                 if not os.path.exists(timepath+"time.csv"):
                     os.mknod(timepath+"time.csv")
-                print(timepath+"time.csv",str(threshold))
                 file=open("./function.h","r+")
                 flist=file.readlines()
                 file.close()
@@ -62,5 +61,4 @@ for datatype in ["double","float"]:
                     f.writelines(this_time_list)
                     f.close()
                 else:
-                    print(datatype,str(monitor),str(threshold),str(para))
                     sys.exit(1)                        

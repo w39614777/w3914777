@@ -21,9 +21,9 @@
    const int unitx=16,unity=16,unitdimX=dimX/unitx,unitdimY=dimY/unity,uxd2=unitx/2,uxd2s1=uxd2-1,uxs1=unitx-1,uys1=unity-1,dimXd2=dimX/2,unitNums=unitdimX*unitdimY;
    const highprecision threshold=0.99;
   const highprecision ratio=1.0;
-   // #define PRINT_INFO
+   // 
    #define AMSTENCIL
-   // define GET_TIME表示要获取程序的执行时间，GET_RESULT表示获取程序的结果,GET_MonitorTIME表示获取amstencil的monitor时间,monitor_conversion_independent表示获取不加monitor和type conversion的时间
+   // 
    #define End2end
    #define Monitor2
    #ifdef AMSTENCIL
@@ -33,7 +33,7 @@
       typedef half lowprecision;
       const int lowprecison_dimX=dimX;
    #endif
-   // 在pure half或者 pure half2中
+   // 
    #define HALF2
    #ifdef HALF
       typedef half purelowprecision;
