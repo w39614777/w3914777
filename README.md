@@ -30,7 +30,7 @@ Table 3 for Snowflake Crystal Growth:
         
 Table 3 for Solid-State Sintering:
 
-    Commands of reproduction:(The following 4 commands should be executed serially)
+    Commands of reproduction:
         cd w3914777/sintering
         python end2end_run1.py
         python end2end_run2.py 
